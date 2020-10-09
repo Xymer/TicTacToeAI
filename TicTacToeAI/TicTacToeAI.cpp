@@ -128,7 +128,7 @@ public:
 
 		return 0;
 	}
-	int MinMax(Mark board[BOARD_SIZE][BOARD_SIZE], int depth, bool bIsMaxValue) {
+	int Minimax(Mark board[BOARD_SIZE][BOARD_SIZE], int depth, bool bIsMaxValue) {
 		int score = CheckVictory(board);
 		if (score == 10)
 		{
@@ -156,7 +156,7 @@ public:
 					if (board[i][j] == Mark::empty)
 					{
 						board[i][j] = Mark::AI;
-						int temp = max(bestValue, MinMax(board, depth + 1, !bIsMaxValue));
+						int temp = max(bestValue, Minimax(board, depth + 1, !bIsMaxValue));
 						bestValue = max(bestValue, temp);
 						board[i][j] = Mark::empty;
 					}
@@ -174,7 +174,7 @@ public:
 					if (board[i][j] == Mark::empty)
 					{
 						board[i][j] = Mark::player;
-						int temp = min(bestValue, MinMax(board, depth + 1, !bIsMaxValue));
+						int temp = min(bestValue, Minimax(board, depth + 1, !bIsMaxValue));
 						bestValue = min(bestValue, temp);
 						board[i][j] = Mark::empty;
 					}
@@ -199,7 +199,7 @@ public:
 				if (board[i][j] == Mark::empty)
 				{
 					board[i][j] = Mark::AI;
-					int temp = MinMax(board, 0, false);
+					int temp = Minimax(board, 0, false);
 
 					board[i][j] = Mark::empty;
 					if (temp > bestValue)
@@ -272,7 +272,7 @@ public:
 			}
 			else
 			{
-				puts("Draw");
+				puts("Draw!");
 				endGame = true;
 			}
 		} while (!endGame);
